@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C (MSYS2 UCRT64 GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+
+            // 调的就是 tasks.json 编出来的那个 exe:同目录、同文件名
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            // 工作目录 = 源文件所在目录。程序里用相对路径读文件时,行为才固定
+            "cwd": "${fileDirname}",
+            "environment": [],
+
+            // 让程序跑在"集成终端"里。默认是 internalConsole(调试控制台),
+            // 那边对 scanf 这类标准输入支持不好,输入会没反应。
+            "console": "integratedTerminal",
+            "externalConsole": false,
+
+            "MIMode": "gdb",
+            // 绝对路径,不走 PATH。gdb 和 gcc 同属 UCRT64,ABI 才对得上
+            "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "按数组/结构体原始元素展开,不折叠",
+                    "text": "-gdb-set print elements 200",
+                    "ignoreFailures": true
+                }
+            ],
+
+            // 调试前自动编译。这个字符串必须和 tasks.json 里的 "label" 一模一样
+            "preLaunchTask": "build C program"
+        }
+    ]
+}

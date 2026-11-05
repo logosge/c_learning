@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // ------------------------------------------------------------------
+            // F5 / Ctrl+Shift+B 都走这个任务:把"当前打开的 .c"编成同目录同名的 .exe
+            //
+            // 为什么用 "process" 而不是 "shell":
+            //   process 直接把 gcc.exe 当进程启动,参数按数组原样传过去,中间没有
+            //   任何 shell 参与。于是既不用担心空格/反斜杠被 shell 吃掉,也不用
+            //   依赖"集成终端默认 profile 是哪个"。参数里就**不要**再写引号了。
+            // ------------------------------------------------------------------
+            "label": "build C program",
+            "type": "process",
+            "command": "C:/msys64/ucrt64/bin/gcc.exe",
+            "args": [
+                // -g   : 生成 DWARF 调试信息。少了它,断点落不到源码行、变量看不见
+                // -O0  : 调试期不优化。优化后语句会被合并/重排,单步会"乱跳"
+                "-g",
+                "-O0",
+                // 标准与警告。警告只进"问题"面板,不会让编译失败
+                "-std=gnu17",
+                "-Wall",
+                "-Wextra",
+                // 头文件搜索路径:以后把 .h 放进 include/ 就能直接 #include
+                "-I", "${fileDirname}",
+                "-I", "${workspaceFolder}/include",
+                // 源文件 -> 产物。产物路径必须和 launch.json 的 program 严格对应
+                "${file}",
+                "-o", "${fileDirname}/${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+                // 必加!MSYS2 的 gcc 编译时要靠 /ucrt64/bin 里的 DLL(cc1/as/ld 依赖
+                // libisl、libmpc、zlib 等)。PATH 里没有它,gcc 会**静默** exit 1、
+                // 什么都不打印 —— 这是最难查的一种失败。
+                "env": {
+                    "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "reveal": "silent",
+                "clear": true,
+                "panel": "shared"
+            }
+        }
+    ]
+}

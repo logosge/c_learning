@@ -1,0 +1,37 @@
+# 对齐 src/ 下已有代码的书本风格(K.N. King《C 语言程序设计:现代方法》)
+#   - 函数体左大括号独占一行;控制语句(if/while/for/switch)的大括号跟在同行
+#   - } else { 写在同一行
+#   - 4 空格缩进,不用 Tab
+#   - case 标签相对 switch 缩进一层
+# 用法: VSCode 里 Shift+Alt+F;或在终端 C:/msys64/ucrt64/bin/clang-format.exe -i 文件名.c
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: true
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+IndentCaseLabels: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+SpaceBeforeParens: ControlStatements
+PointerAlignment: Right
+KeepEmptyLinesAtTheStartOfBlocks: false

@@ -1,0 +1,24 @@
+{
+    // ---------------------------------------------------------------------
+    // 这个文件只服务于「IntelliSense / 红波浪线 / 跳转定义」,不参与编译。
+    // 真正的编译参数在 tasks.json 里。
+    // 所以这里不要再写编译期不需要的宏 —— 否则会出现
+    // "编辑器走一个 #ifdef 分支、实际编译走另一个分支" 的怪现象。
+    // ---------------------------------------------------------------------
+    "version": 4,
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include"
+            ],
+            "defines": [],
+            // 指定编译器后,扩展会自动去问它要内置头文件路径(stdio.h 等),
+            // 不用手写一堆 include 目录
+            "compilerPath": "C:/msys64/ucrt64/bin/gcc.exe",
+            "cStandard": "c17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ]
+}

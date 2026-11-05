@@ -1,0 +1,30 @@
+{
+    // ================= 1. 工具链(工作区级,跟着这个文件夹走) =================
+    "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/gcc.exe",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+
+    // ================= 2. 格式化 (clang-format) =================
+    "C_Cpp.clang_format_path": "C:/msys64/ucrt64/bin/clang-format.exe",
+    // "file" = 读项目根目录的 .clang-format(已按你现有代码风格配好)
+    "C_Cpp.clang_format_style": "file",
+    "C_Cpp.formatting": "clangFormat",
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        // 想保存即格式化,把下面改成 true 即可
+        "editor.formatOnSave": false,
+        "editor.autoIndent": "advanced"
+    },
+
+    // ================= 3. 静态分析 (clang-tidy,扩展原生内置) =================
+    "C_Cpp.codeAnalysis.runAutomatically": true,
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "C_Cpp.codeAnalysis.clangTidy.path": "C:/msys64/ucrt64/bin/clang-tidy.exe",
+    "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
+        "bugprone-*",
+        "performance-*",
+        "clang-analyzer-*"
+    ],
+
+    "vim.useSystemClipboard": true
+}
